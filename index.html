@@ -4,220 +4,1029 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Alfred | Full Stack Developer</title>
+    <meta name="description"
+        content="Alfred Lalu, Full Stack Developer specializing in MERN and MEAN stack web development.">
+    <meta name="author" content="Alfred Lalu">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
-        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        :root {
+            --ink: #180b35;
+            --muted: #5a5177;
+            --glass: rgba(255, 255, 255, .48);
+            --border: rgba(255, 255, 255, .7)
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: "Inter Tight", system-ui, sans-serif;
+            color: var(--ink);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #cdbdf9 0%, #aebbf9 50%, #94bafa 100%) fixed
+        }
+
+        a {
+            color: inherit
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--ink);
+            outline-offset: 4px
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 620px;
+            overflow: hidden
+        }
+
+        .mark {
+            position: absolute;
+            top: 24px;
+            left: 28px;
+            z-index: 6;
+            width: 34px;
+            height: 34px;
+            background: var(--ink);
+            color: #cdbdf9;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px
+        }
+
+        .cv {
+            position: absolute;
+            top: 26px;
+            right: 28px;
+            z-index: 6;
+            padding: 8px 16px;
+            border: 1px solid var(--ink);
+            border-radius: 30px;
+            font-size: .85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: .25s
+        }
+
+        .cv:hover {
+            background: var(--ink);
+            color: #d0c1fa
+        }
+
+        .type {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center
+        }
+
+        .type .line {
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+            font-size: clamp(3.2rem, 16vw, 17rem);
+            line-height: .8;
+            letter-spacing: -.055em;
+            text-transform: uppercase;
+            white-space: nowrap
+        }
+
+        .type nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(16px, 3.2vw, 50px);
+            margin: clamp(6px, 1.4vh, 14px) 0;
+            position: relative;
+            z-index: 1
+        }
+
+        .type nav .gap {
+            display: none
+        }
+
+        .type nav a {
+            font-size: .76rem;
+            text-transform: uppercase;
+            text-decoration: none
+        }
+
+        .type nav a:hover {
+            text-decoration: underline
+        }
+
+        .portrait {
+            position: absolute;
+            z-index: 2;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-42%);
+            height: 84%;
+            max-width: 95%;
+            object-fit: contain;
+            object-position: bottom;
+            pointer-events: none
+        }
+
+        .caption {
+            position: absolute;
+            z-index: 4;
+            bottom: 38px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: var(--ink);
+            font-size: clamp(1.2rem, 2.4vw, 2rem);
+            font-weight: 500;
+            line-height: 1.1;
+            letter-spacing: -.03em;
+            width: 90%
+        }
+
+        .caption span {
+            display: block;
+            font-size: .5em;
+            font-weight: 400;
+            opacity: .9;
+            letter-spacing: 0;
+            margin-top: 4px
+        }
+
+        .corner {
+            position: absolute;
+            z-index: 4;
+            bottom: 24px;
+            font-size: .76rem;
+            text-transform: uppercase;
+            line-height: 1.35
+        }
+
+        .corner b {
+            display: block;
+            font-weight: 600
+        }
+
+        .corner.l {
+            left: 28px
+        }
+
+        .corner.r {
+            right: 28px;
+            text-align: right
+        }
+
+        /* Common */
+        section {
+            padding: 110px 0
+        }
+
+        .wrap {
+            width: min(1120px, calc(100% - 52px));
+            margin: auto
+        }
+
+        .label {
+            font-size: .75rem;
+            font-weight: 600;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            opacity: .65
+        }
+
+        h2 {
+            font-weight: 300;
+            font-size: clamp(3rem, 7vw, 6rem);
+            letter-spacing: -.06em;
+            line-height: .9;
+            margin-bottom: 45px
+        }
+
+        .head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 30px
+        }
+
+        .head p {
+            max-width: 390px;
+            color: var(--muted);
+            margin-bottom: 48px
+        }
+
+        /* About */
+        .cols {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: 80px
+        }
+
+        .about-copy p {
+            color: var(--muted);
+            font-size: 1.08rem;
+            max-width: 60ch
+        }
+
+        .about-copy p+p {
+            margin-top: 20px
+        }
+
+        .highlight {
+            margin-top: 30px;
+            padding: 20px 22px;
+            border-left: 3px solid var(--ink);
+            background: rgba(255, 255, 255, .25)
+        }
+
+        .highlight span {
+            color: var(--muted);
+            font-size: .9rem
+        }
+
+        .facts {
+            list-style: none
+        }
+
+        .facts li {
+            padding: 19px 0;
+            border-top: 1px solid rgba(24, 11, 53, .25)
+        }
+
+        .facts li:last-child {
+            border-bottom: 1px solid rgba(24, 11, 53, .25)
+        }
+
+        .facts b {
+            display: block;
+            font-weight: 600
+        }
+
+        .facts span {
+            color: var(--muted);
+            font-size: .9rem
+        }
+
+        /* Experience */
+        .exp {
+            padding: 34px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            border-radius: 22px
+        }
+
+        .exp-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 22px
+        }
+
+        .exp-top b {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: block
+        }
+
+        .exp-top span {
+            color: var(--muted)
+        }
+
+        .exp ul {
+            padding-left: 20px;
+            color: var(--muted)
+        }
+
+        .exp li+li {
+            margin-top: 9px
+        }
+
+        /* Projects */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px
+        }
+
+        .pcard {
+            background: var(--glass);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform .25s, box-shadow .25s
+        }
+
+        .pcard:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(24, 11, 53, .12)
+        }
+
+        .pcard.featured {
+            grid-column: span 2
+        }
+
+        .pcard img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+            background: rgba(24, 11, 53, .08)
+        }
+
+        .pcard.featured img {
+            aspect-ratio: 2.2/1
+        }
+
+        .pbody {
+            padding: 22px 24px 25px;
+            display: flex;
+            flex-direction: column;
+            flex: 1
+        }
+
+        .ptag {
+            font-size: .72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--muted);
+            margin-bottom: 7px
+        }
+
+        .pbody h3 {
+            font-size: 1.65rem;
+            font-weight: 500;
+            letter-spacing: -.04em
+        }
+
+        .pbody p {
+            color: var(--muted);
+            margin-top: 8px;
+            flex: 1
+        }
+
+        .tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 17px
+        }
+
+        .tech span {
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .5);
+            border: 1px solid rgba(24, 11, 53, .12);
+            font-size: .7rem
+        }
+
+        .plinks {
+            margin-top: 22px
+        }
+
+        .plinks a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 9px 15px;
+            border: 1px solid var(--ink);
+            border-radius: 25px;
+            font-size: .78rem;
+            font-weight: 600;
+            transition: .2s
+        }
+
+        .plinks a:hover {
+            background: var(--ink);
+            color: #fff
+        }
+
+        /* Skills */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 14px
+        }
+
+        .skill {
+            min-height: 125px;
+            text-align: center;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px 8px;
+            font-weight: 500;
+            font-size: .88rem;
+            transition: .2s
+        }
+
+        .skill:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, .65)
+        }
+
+        .skill img,
+        .skill .ic {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 9px;
+            font-size: 2.6rem
+        }
+
+        /* Education */
+        .edu {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 30px;
+            padding: 28px 0;
+            border-top: 1px solid rgba(24, 11, 53, .25);
+            border-bottom: 1px solid rgba(24, 11, 53, .25)
+        }
+
+        .edu h3 {
+            font-size: 1.4rem;
+            font-weight: 500
+        }
+
+        .edu p,
+        .edu small {
+            color: var(--muted)
+        }
+
+        /* Contact */
+        #contact {
+            text-align: center
+        }
+
+        .cin {
+            max-width: 720px;
+            margin: auto
+        }
+
+        .cin h2 {
+            margin-bottom: 22px
+        }
+
+        .cin>p {
+            color: var(--muted);
+            max-width: 52ch;
+            margin: 0 auto 35px;
+            font-size: 1.08rem
+        }
+
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .social a {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 1.5px solid var(--ink);
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: .2s
+        }
+
+        .social a:hover {
+            background: var(--ink);
+            color: #cdbdf9;
+            transform: translateY(-3px)
+        }
+
+        .note {
+            margin-top: 30px;
+            font-size: .8rem;
+            color: var(--muted)
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: .8rem;
+            color: var(--muted);
+            border-top: 1px solid rgba(24, 11, 53, .15)
+        }
+
+        @media (max-width:900px) {
+            .cols {
+                grid-template-columns: 1fr;
+                gap: 50px
+            }
+
+            .projects {
+                grid-template-columns: 1fr
+            }
+
+            .pcard.featured {
+                grid-column: span 1
+            }
+
+            .pcard.featured img {
+                aspect-ratio: 16/9
+            }
+
+            .head {
+                display: block
+            }
+
+            .head p {
+                margin-bottom: 35px
+            }
+        }
+
+        @media (max-width:600px) {
+            section {
+                padding: 75px 0
+            }
+
+            .mark {
+                left: 17px;
+                top: 17px
+            }
+
+            .cv {
+                right: 17px;
+                top: 18px;
+                padding: 7px 12px;
+                font-size: .75rem
+            }
+
+            .type {
+                justify-content: center
+            }
+
+            .type nav {
+                gap: 12px;
+                flex-wrap: wrap;
+                margin: 8px 0
+            }
+
+            .type nav .gap {
+                display: none
+            }
+
+            .portrait {
+                height: 58%;
+                max-width: none
+            }
+
+            .corner {
+                display: none
+            }
+
+            .caption {
+                bottom: 28px
+            }
+
+            h2 {
+                font-size: 3.3rem;
+                margin-bottom: 32px
+            }
+
+            .exp {
+                padding: 22px
+            }
+
+            .exp-top {
+                display: block
+            }
+
+            .edu {
+                grid-template-columns: 1fr;
+                gap: 5px
+            }
+
+            .skills {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            * {
+                transition: none !important;
+                scroll-behavior: auto !important
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <h2 class="logo"></h2>
-        <ul class="nav-links">
-            <li><a href="#"><b>Home</b></a></li>
-            <li><a href="#proj"><b>Projects</b></a></li>
-            <li><a href="#ab"><b>About</b></a></li>
-            
-              <li><a href="#CONTACT"><b>Contact</b></a></li>
-        </ul>
-        <div class=""></div>
-    </nav>
+    <header class="hero" id="top">
+        <a href="#top" class="mark" aria-label="Home">A</a>
+        <a href="./images/ats_cv (14).pdf" download class="cv"><i class="fa-solid fa-download"></i>&nbsp; Download CV</a>
+        <h1 class="type">
+            <span class="line">Full Stack</span>
+            <nav aria-label="Main navigation">
+                <a href="#about">About</a><a href="#experience">Experience</a><span class="gap"></span><a
+                    href="#projects">Projects</a><a href="#contact">Contact</a>
+            </nav>
+            <span class="line">Developer</span>
+        </h1>
+        <p class="caption">Hi, I'm Alfred.<span>Building web applications with modern JavaScript</span></p>
+        <div class="corner l">Kerala, India<b>Ernakulam</b></div>
+        <div class="corner r">MERN &amp; MEAN<b>Open to work</b></div>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-left">
-            <p class="intro">Hi, I'm Alfred</p>
-            <h1 class="title">
-                <span class="purple">Full Stack</span><br>
-                Developer
-            </h1>
-            <p class="description">
-                A Full Stack Developer who builds modern and responsive web applications. I focus on clean code, smooth
-                performance, and great user experience.
-            </p>
-
-            <div class="buttons">
-                <a href="./images/ats_cv (6).pdf" download class="btn btn-dark">Download CV</a>
-                
-               <a href="#proj" class="btn btn-light">Browse Projects</a>
-            </div>
-        </div>
-
-        <div class="hero-right">
-            <div class="image-ring">
-                <img src="images/photo.jpeg" alt="profile">
+    <section id="about">
+        <div class="wrap">
+            <div class="label">01 — About</div>
+            <h2>About me</h2>
+            <div class="cols">
+                <div class="about-copy">
+                    <p>I'm a B.Voc Software Development graduate from St. Albert's College, Ernakulam, with a strong
+                        interest in full-stack development and building web applications that are efficient, reliable,
+                        and easy to use.</p>
+                    <p>I work primarily with the MERN and MEAN stacks and enjoy developing both frontend interfaces and
+                        backend systems, from database design and REST APIs to authentication, application logic, and
+                        responsive user interfaces.</p>
+                    <div class="highlight"><strong>Currently focused on Full-Stack Development</strong><br><span>React ·
+                            Node.js · Express.js · MongoDB · Angular</span></div>
+                </div>
+                <ul class="facts">
+                    <li><b>B.Voc Software Development</b><span>St. Albert's College, Ernakulam</span></li>
+                    <li><b>MERN &amp; MEAN</b><span>Full-stack web application development</span></li>
+                    <li><b>Backend Development</b><span>Node.js, Express.js, MongoDB &amp; REST APIs</span></li>
+                    <li><b>Frontend Development</b><span>React, Angular, JavaScript &amp; responsive UI</span></li>
+                    <li><b>Career</b><span>Open to internships, freelance &amp; full-time roles</span></li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <h1 id="ab"><i>About Me</i></h1>
+    <section id="experience">
+        <div class="wrap">
+            <div class="label">02 — Experience</div>
+            <h2>Experience</h2>
 
-    <section class="about-wrapper">
+            <div class="exp">
+                <div class="exp-top">
+                    <div>
+                        <b>TrackPi</b>
+                        <span>Full-Stack Developer Intern</span>
+                    </div>
+                    <span>Internship</span>
+                </div>
 
-        <div class="about-left">
+                <ul>
+                    <li>
+                        Contributing to the development of a full-stack Learning Management System
+                        using React, Node.js, Express.js and MongoDB.
+                    </li>
 
-            <p class="about-text">
-                <br><br>
-                I'm Alfred ,a B.Voc Software Development graduate from St. Albert’s College in Ernakulam. My main focus
-                is
-                full-stack web development. I specialize in MERN and MEAN technologies like MongoDB, Express.js, React,
-                Angular, and Node.js. I enjoy building efficient, scalable, and user-friendly applications.
+                    <li>
+                        Developing and integrating RESTful APIs for user management, course
+                        management, enrollment, assessments, progress tracking and certificate generation.
+                    </li>
 
-                I love learning new tools, writing clean code, and exploring new technologies that improve the
-                development process. As a curious developer, I view every challenge as a chance to grow, innovate, and
-                create meaningful digital solutions. I’m always eager to collaborate, solve problems, and contribute to
-                impactful projects.
-            </p>
-        </div>
+                    <li>
+                        Designing and managing MongoDB database schemas and implementing backend
+                        business logic using Node.js, Express.js and Mongoose.
+                    </li>
 
-        <div class="about-right">
-            <img src="https://user-images.githubusercontent.com/58518192/87162442-bf3e8180-c2e7-11ea-9f2a-53a50306b7ce.gif" alt="Profile Image">
-        </div>
-    </section>
+                    <li>
+                        Implementing JWT-based authentication and role-based access control for
+                        User, Admin and SuperAdmin roles.
+                    </li>
 
-    <!-- Projects Section -->
-    <section id="proj" class="projects-section">
-        <h2 class="projects-title">Projects</h2>
+                    <li>
+                        Building frontend features in React and integrating them with backend APIs
+                        for seamless user and course management.
+                    </li>
 
-        <div class="projects-grid">
+                    <li>
+                        Implementing video progress tracking, section assessments, course completion
+                        and certificate generation functionality.
+                    </li>
 
-            <div class="project-card">
-                <img src="images/first.png" alt="Project Image">
-                <h3>Travel Vlog</h3>
-                <p>parallax scrolling  Website</p>
-                <a href="https://travel-vlog-mocha.vercel.app" class="project-btn">View</a>
+                    <li>
+                        Collaborating with the development team to build, test and improve LMS
+                        features and overall application functionality.
+                    </li>
+                </ul>
             </div>
-
-            <div class="project-card">
-                <img src="images/seco.png" alt="Project Image">
-                <h3>Bookstore Website</h3>
-                <p>Full Stack Project</p>
-                <a href="https://bookstore-front-end-sigma.vercel.app" class="project-btn">View</a>
-            </div>
-
-            <div class="project-card">
-                <img src="images/thir.png" alt="Project Image">
-                <h3>Counter App</h3>
-                <p>Redux</p>
-                <a href="https://redux-small.vercel.app" class="project-btn">View</a>
-            </div>
-
-            <div class="project-card">
-                <img src="images/fort.png" alt="Project Image">
-                <h3>SellMedia</h3>
-                <p>React with json-server</p>
-                <a href="https://sellermedia-front-end.vercel.app" class="project-btn">View</a>
-            </div>
-
-            <div class="project-card">
-                <img src="images/fift.png" alt="Project Image">
-                <h3>Blog-Media</h3>
-                <p>Full Stack Project</p>
-                <a href="https://blog-media-navy.vercel.app" class="project-btn">View</a>
-            </div>
-
-            <div class="project-card">
-                <img src="project6.jpg" alt="Project Image">
-                <h3>Project Name</h3>
-                <p>Short description goes here.</p>
-                <a href="#" class="project-btn">View</a>
-            </div>
-              <div class="project-card">
-                <img src="project6.jpg" alt="Project Image">
-                <h3>Project Name</h3>
-                <p>Short description goes here.</p>
-                <a href="#" class="project-btn">View</a>
-            </div>
-            
-
-        </div>
-    </section>
-    <section class="skills-section">
-        <h2 class="skills-title">My Skills</h2>
-
-        <div class="skills-grid">
-
-            <div class="skill-card">
-                <img src="images/html.png" alt="HTML">
-
-            </div>
-
-            <div class="skill-card">
-                <img src="images/css.png" alt="CSS">
-
-            </div>
-
-            <div class="skill-card">
-                <img src="images/Express-JS.png" alt="Express">
-
-            </div>
-
-            <div class="skill-card">
-                <img src="images/react2.png" alt="React">
-
-            </div>
-
-            <div class="skill-card">
-                <img src="images/node.png" alt="Node">
-
-            </div>
-
-
-
         </div>
     </section>
 
+    <section id="projects">
+        <div class="wrap">
 
-    <section id="CONTACT">
-        <div class="contact-body">
-            <h1 id="contacthead">CONTACT</h1>
+            <div class="label">03 — Selected work</div>
 
-            <div class="contact-logo">
-                <div class="logo">
+            <div class="head">
+                <h2>Projects</h2>
 
-                    <a href="https://github.com/alfred680 " target="_blank">
-                        <i class="fa-brands fa-github brands"></i>
-                    </a>
-                </div>
-                <div class="logo">
-                    <i class="fa-brands fa-linkedin brands"></i>
-                    <a href="https://www.linkedin.com/in/alfred-lalu-mearn"></a>
-                </div>
-                <div class="logo">
-                    <i class="fa-brands fa-whatsapp brands"></i>
-                    <a href=""></a>
-                </div>
-                <div class="logo">
-                    <a href="" target="_blank">
-                        <i class="fa-solid fa-envelope brands"></i>
-                    </a>
+                <p>
+                   
+                </p>
+            </div>
 
-                </div>
+            <div class="projects">
+
+                <!-- LMS -->
+                <article class="pcard featured">
+
+                    <div class="pbody">
+
+                        <span class="ptag">Major Project · Full Stack</span>
+
+                        <h3>Learning Management System</h3>
+
+                        <p>
+                            A full-stack Learning Management System built with React,
+                            Node.js, Express.js and MongoDB. It includes user management,
+                            course management, enrollment, video progress tracking,
+                            assessments, role-based access control and certificate
+                            management.
+                        </p>
+
+                        <div class="tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>Express.js</span>
+                            <span>MongoDB</span>
+                            <span>Mongoose</span>
+                            <span>JWT</span>
+                            <span>REST API</span>
+                        </div>
+
+                        <div class="plinks">
+                            <a href="https://github.com/Trackpi/LMS_TrackPi" target="_blank" rel="noopener">
+                                <i class="fa-brands fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+
+                    </div>
+
+                </article>
 
 
+                <!-- Travel Vlog -->
+                <article class="pcard">
 
+                    <div class="pbody">
+
+                        <span class="ptag">Frontend</span>
+
+                        <h3>Travel Vlog</h3>
+
+                        <p>
+                            A travel website with a visual layout and parallax
+                            scrolling effects.
+                        </p>
+
+                        <div class="tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+
+                        <div class="plinks">
+                            <a href="https://travel-vlog-mocha.vercel.app" target="_blank" rel="noopener">
+                                Live Demo
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Bookstore -->
+                <article class="pcard">
+
+                    <div class="pbody">
+
+                        <span class="ptag">Full Stack</span>
+
+                        <h3>Bookstore</h3>
+
+                        <p>
+                            A full-stack bookstore application with a React frontend
+                            and Node.js backend.
+                        </p>
+
+                        <div class="tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>Express</span>
+                        </div>
+
+                        <div class="plinks">
+                            <a href="https://bookstore-front-end-sigma.vercel.app" target="_blank" rel="noopener">
+                                Live Demo
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Counter App -->
+                <article class="pcard">
+
+                    <div class="pbody">
+
+                        <span class="ptag">React</span>
+
+                        <h3>Counter App</h3>
+
+                        <p>
+                            A small React application demonstrating global state
+                            management using Redux.
+                        </p>
+
+                        <div class="tech">
+                            <span>React</span>
+                            <span>Redux</span>
+                            <span>JavaScript</span>
+                        </div>
+
+                        <div class="plinks">
+                            <a href="https://redux-small.vercel.app" target="_blank" rel="noopener">
+                                Live Demo
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- SellMedia -->
+                <article class="pcard">
+
+                    <div class="pbody">
+
+                        <span class="ptag">React</span>
+
+                        <h3>SellMedia</h3>
+
+                        <p>
+                            A media selling application built with React and a
+                            json-server API.
+                        </p>
+
+                        <div class="tech">
+                            <span>React</span>
+                            <span>JSON Server</span>
+                            <span>JavaScript</span>
+                        </div>
+
+                        <div class="plinks">
+                            <a href="https://sellermedia-front-end.vercel.app" target="_blank" rel="noopener">
+                                Live Demo
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Blog Media -->
+                <article class="pcard featured">
+
+                    <div class="pbody">
+
+                        <span class="ptag">Major Project · Full Stack</span>
+
+                        <h3>Blog-Media</h3>
+
+                        <p>
+                            A full-stack blogging platform for writing, publishing, and sharing posts, featuring
+                            user-to-user chat, post comments, and premium user features.
+                        </p>
+
+                        <div class="tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>Express.js</span>
+                            <span>MongoDB</span>
+                            <span>Mongoose</span>
+                            <span>JWT</span>
+                            <span>REST API</span>
+                        </div>
+
+                        <div class="plinks">
+                            <a href="https://blog-media-navy.vercel.app" target="_blank" rel="noopener">
+                                Live Demo
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </article>
 
             </div>
-            <footer>
-
-                <div id="copyright">
-                    <p>&copy;COPY RIGHT ALL BELONGS TO ME &reg;</p>
-                </div>
-            </footer>
 
         </div>
-
     </section>
 
+    <section id="skills">
+        <div class="wrap">
+            <div class="label">04 — Technologies</div>
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="skill"><img src="images/html.png" alt="">HTML</div>
+                <div class="skill"><img src="images/css.png" alt="">CSS</div>
+                <div class="skill"><img src="images/react2.png" alt="">React</div>
+                <div class="skill"><img src="images/node.png" alt="">Node.js</div>
+                <div class="skill"><img src="images/Express-JS.png" alt="">Express.js</div>
+                <div class="skill">
+                    <div class="ic"><i class="fa-brands fa-angular"></i></div>Angular
+                </div>
+                <div class="skill">
+                    <div class="ic"><i class="fa-brands fa-js"></i></div>JavaScript
+                </div>
+                <div class="skill">
+                    <div class="ic"><i class="fa-brands fa-git-alt"></i></div>Git
+                </div>
+                <div class="skill">
+                    <div class="ic"><i class="fa-brands fa-github"></i></div>GitHub
+                </div>
+                <div class="skill">
+                    <div class="ic"><i class="fa-solid fa-database"></i></div>MongoDB
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section id="education">
+        <div class="wrap">
+            <div class="label">05 — Education</div>
+            <h2>Education</h2>
+            <div class="edu">
+                <div>
+                    <h3>B.Voc Software Development</h3>
+                    <p>St. Albert's College, Ernakulam</p>
+                </div><small>Software Development</small>
+            </div>
+        </div>
+    </section>
 
+    <section id="contact">
+        <div class="wrap">
+            <div class="cin">
+                <div class="label">06 — Contact</div>
+                <h2>Let's work together</h2>
+                <p>Have a project, internship opportunity, freelance work, or full-time opening in mind? Feel free to
+                    connect with me.</p>
+                <div class="social">
+                    <a href="https://github.com/alfred680" target="_blank" rel="noopener" aria-label="GitHub"><i
+                            class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/alfred-lalu-mearn" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener" aria-label="WhatsApp"><i
+                            class="fa-brands fa-whatsapp"></i></a>
+                    <a href="mailto:youremail@example.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+                <div class="note">Ernakulam, Kerala, India · Open to work</div>
+            </div>
+        </div>
+    </section>
 
-
-
+    <footer>&copy; 2026 Alfred Lalu. All rights reserved.</footer>
 </body>
 
 </html>
